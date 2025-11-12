@@ -1,0 +1,22 @@
+{
+  "id": "local-environment",
+  "name": "JSONPlaceholder Environment",
+  "values": [
+    {
+      "key": "baseUrl",
+      "value": "https://jsonplaceholder.typicode.com",
+      "enabled": true
+    },
+    {
+      "key": "postId",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "key": "createdPostId",
+      "value": "",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}

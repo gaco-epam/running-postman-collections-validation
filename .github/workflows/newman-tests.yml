@@ -30,4 +30,17 @@ jobs:
         run: |
           newman run "https://api.getpostman.com/collections/${COLLECTION_ID}?apikey=${POSTMAN_API_KEY}" \
             -e environment.json \
+            -r cli,json \
+            --reporter-json-export newman-results.json \
             --color on
+      
+      - name: Validate Coverage Threshold
+        run: bash validate-coverage.sh
+      
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-results
+          path: newman-results.json
+          retention-days: 30

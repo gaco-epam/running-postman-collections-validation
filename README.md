@@ -5,10 +5,12 @@ Automated Postman collection execution using Newman in GitHub Actions.
 ## Process
 
 1. **GitHub Actions** detects push or PR
-2. **Installs Newman** on the runner
+2. **Installs Newman** and reporters on the runner
 3. **Executes collection** from Postman API
 4. **Applies environment** with configured variables
-5. **Reports results** in the workflow
+5. **Validates coverage** - Fails if < 80% assertions pass
+6. **Generates reports** - HTML and JSON artifacts
+7. **Reports results** in the workflow
 
 ## Configuration
 
@@ -18,11 +20,21 @@ Configure these secrets in your repository:
 - `POSTMAN_API_KEY` - Your Postman API key
 - `COLLECTION_ID` - Your Postman collection ID
 
-### 2. Triggers
+### 2. Coverage Threshold
+The pipeline requires **80% minimum assertion pass rate**:
+- ✅ Pipeline passes if ≥80% assertions succeed
+- ❌ Pipeline fails if <80% assertions succeed
+
+### 3. Triggers
 The pipeline runs on:
 - Push to `main` or `develop`
 - Pull requests to `main`
 - Manually from Actions tab
+
+## Reports
+
+After each run, download artifacts containing:
+- `newman-results.json` - Raw test results with coverage data
 
 ## Local Execution
 
